@@ -10,14 +10,16 @@ type Config struct {
 	KafkaConsumerTopic string
 	KafkaProducerTopic string
 	KafkaConsumerGroup string
+	SpoolmanAPIURL string
 }
 
 func Load() *Config {
 	return &Config{
 		KafkaBrokers:       getBrokers(),
 		KafkaConsumerTopic: getEnv("KAFKA_CONSUMER_TOPIC", "3dprinter-filament-transfer-initiated"),
-		KafkaProducerTopic: getEnv("KAFKA_PRODUCER_TOPIC", "output-topic"),
+		KafkaProducerTopic: getEnv("KAFKA_PRODUCER_TOPIC", "3dprinter-filament-transfer-ready"),
 		KafkaConsumerGroup: getEnv("KAFKA_CONSUMER_GROUP", "spoolman-lookup-service"),
+		SpoolmanAPIURL: getEnv("SPOOLMAN_API_URL", "http://spoolman-svc.spoolman.svc.cluster.local/api/v1"),
 	}
 }
 
